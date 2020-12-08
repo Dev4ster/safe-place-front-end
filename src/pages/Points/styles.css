@@ -1,0 +1,155 @@
+#points-page main {
+  flex: 1;
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background-color: green;
+}
+
+#points-page main .leaflet-container {
+  flex: 1;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+#points-page main .leaflet-container {
+  flex: 1;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+#points-page main #panel {
+  flex: 1;
+  display: flex;
+  max-height: 100vh;
+  height: 100%;
+  width: 360px;
+  position: absolute;
+  z-index: 99999;
+  left: 100px;
+  padding: 100px 10px 100px 10px;
+}
+
+#points-page main #panel .content {
+  flex: 1;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  z-index: 99999;
+  margin: auto;
+  border-radius: 10px;
+  padding: 20px 20px;
+  flex-direction: column;
+}
+
+#points-page main #panel .content h1 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+#points-page main #panel .content fieldset {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+}
+
+#points-page main #panel .content .filters-line {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#points-page main #panel .content .filters-line > div {
+  flex: 1;
+}
+
+#points-page main #panel .content .filters-line > div:first-of-type {
+  flex: 0.5;
+  margin-right: 10px;
+}
+
+#points-page main #panel .content fieldset small {
+  margin-top: 10px;
+  margin-left: 5px;
+}
+
+#points-page main #panel .content fieldset input {
+  flex: 1;
+  border-radius: 8px;
+  border: 0;
+  padding: 10px 24px;
+  font-size: 16px;
+  color: #6c6c80;
+  margin-bottom: 5px;
+}
+
+#points-page main #panel .content .selected-point {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  border-radius: 4px;
+  padding: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+#points-page main #panel .content .selected-point a.report {
+  color: red;
+  font-size: 12px;
+  margin-top: auto;
+  margin-left: auto;
+}
+
+#points-page main #panel .content .assessments {
+  margin-top: 30px;
+}
+
+#points-page main #panel .content .assessments h2 {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+#points-page main #panel .content .assessments ul {
+  list-style: none;
+  padding: 0 10px;
+}
+
+#points-page main #panel .content .assessments ul li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#points-page main #panel .content .assessments ul li span {
+  margin-left: 10px;
+  font-size: 15px;
+  color: #333;
+}
+#content-popup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#content-popup strong {
+  font-size: 14px;
+  flex: 1;
+}
+
+#content-popup strong::first-letter {
+  text-transform: uppercase;
+}
+
+#ir {
+  padding: 15px;
+  background-color: var(--primary-color);
+  border-radius: 100%;
+  justify-content: center;
+  align-self: center;
+  display: flex;
+}
