@@ -1,9 +1,10 @@
-import React, { useEffect, useState, ChangeEvent, useRef, FormEvent } from 'react'
+import React, { useEffect, useState, ChangeEvent, useCallback, FormEvent } from 'react'
 import { FiArrowLeft } from 'react-icons/fi'
 import {Link} from 'react-router-dom'
 
 import { TileLayer, Marker, MapContainer, useMapEvents } from 'react-leaflet'
 import { toast } from 'react-toastify';
+import AsyncSelect from 'react-select';
 
 import api from '../../services/api'
 import axios from 'axios'
@@ -53,9 +54,10 @@ function MyComponent({locationCB} : MyComponentDTO) {
 const Register = () => {
   const [assessments, setAssessments] = useState<Assessments[]>([])
   const [ufs, setUfs] = useState<UFDTO[]>([])
-  const [municipios, setMunicipios] = useState<MunicipiosDTO[]>([])
+  const [municipios, setMunicipios] = useState<{label: string, value: number}[]>([])
 
   //form
+  const [loading, setLoading] = useState(false)
   const [position, setPosition] = useState<[number, number]>([0, 0])
   const [uf, setUf] = useState('')
   const [municipio, setMunicipio] = useState('')
@@ -81,6 +83,8 @@ const Register = () => {
   }
 
   const handleSubmit = async (e: FormEvent) =>{
+    toast('Enviando os dados aguarde...', {type: 'info' })
+    setLoading(true);
     e.preventDefault();
     const data = {
       address: "",
@@ -96,10 +100,56 @@ const Register = () => {
         has: assessmentsPoint.includes(assessment.id)
       }))
     }
-    const response = await axios.get(`https://nominatim.openstreetmap.org/reverse.php?lat=${data.latitude}&lon=${data.longitude}&zoom=18&format=jsonv2`)
-    data.address = response.data.name
-    toast('enviando', {type: 'success'})
-    console.log(data)
+    try {
+      const response = await axios.get(`https://nominatim.openstreetmap.org/reverse.php?lat=${data.latitude}&lon=${data.longitude}&zoom=18&format=jsonv2`)
+      data.address = response.data.name
+      
+      const send = await api.post('/points', data)
+  
+      if(send.data.success){
+        toast('Ponto Cadastrado com sucesso', {type: 'success'})
+        setNome('')
+        setMunicipio('')
+        setPosition([0, 0])
+        setEmail('')
+        setWhats('')
+        setUf('')
+        setMunicipio('')
+        setAssessmentsPoint([])
+        setLoading(false)
+      }else {
+        toast('Houve um problema ao cadastrar seu ponto, tente novamente.', {type: 'error'})
+        setLoading(false)
+      }
+    }catch(e){
+      setLoading(false)
+      toast('Houve um problema ao cadastrar seu ponto, tente novamente.', {type: 'error'})
+    }
+    
+    
+
+  }
+
+  const loadUfs = async () => {
+    const response = await axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
+    const data = response.data.map((ufData : UFDTO) => ({label: ufData.nome, value: ufData.sigla}))
+    console.log('ufs',data)
+    return data
+  }
+
+  const selectUf = (data : {label: string, value: string}) => {
+    setUf(data.value)
+  }
+
+  const loadMunicipios= async () => {
+    const response = await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`)
+    const data = response.data.map((M : MunicipiosDTO) => ({label: M.nome, value: M.id}))
+    console.log('ufs',data)
+    return data
+  }
+
+  const selectMunicipio = (data : {label: string, value: Number}) => {
+    setMunicipio(data.label)
   }
 
 
@@ -120,11 +170,13 @@ const Register = () => {
    .then(res=> res.json())
    .then(setUfs)
   }, [])
+  
 
   useEffect(()=>{
     if(uf){
       fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`)
       .then(res=> res.json())
+      .then(res => res.map((M : MunicipiosDTO) => ({label: M.nome, value: M.id})))
       .then(setMunicipios)
     }
    }, [uf])
@@ -155,6 +207,7 @@ const Register = () => {
           value={nome} 
           onChange={e=>setNome(e.target.value)} 
           required
+          disabled={loading}
           />
         </div>
 
@@ -167,6 +220,7 @@ const Register = () => {
             id="email"
             value={email}
             onChange={e=>setEmail(e.target.value)} 
+            disabled={loading}
             />
           </div>
           <div className="field">
@@ -177,6 +231,7 @@ const Register = () => {
             id="whats"
             value={whats}
             onChange={e=>setWhats(e.target.value)} 
+            disabled={loading}
             />
           </div>
         </div>
@@ -207,11 +262,16 @@ const Register = () => {
             <label htmlFor="city">Cidade
             {municipios.length === 0 &&  (<small> - Selecione uma uf</small>)}
             </label>
-            <select name="city" id="city" 
+            <AsyncSelect
+                options={municipios}
+                onChange={selectMunicipio}
+                placeholder="Cidade"
+              />
+            {/* <select name="city" id="city" 
             
             onChange={e => setMunicipio(e.target.value)}
             value={municipio}
-            
+            disabled={loading}
             required
             >
               <option value="">Selecione a cidade</option>
@@ -220,13 +280,21 @@ const Register = () => {
                   value={municipio.nome} 
                   key={municipio.id}>{municipio.nome}</option>
               ))}
-            </select>
+            </select> */}
           </div>
           <div className="field">
             <label htmlFor="uf">Estado</label>
+            {/* <AsyncSelect
+                cacheOptions
+                loadOptions={loadUfs}
+                onChange={selectUf}
+                placeholder="UF"
+                defaultOptions
+              /> */}
             <select name="uf" id="uf" 
             onChange={handleSelectUf} 
             required
+            disabled={loading}
             value={uf}>
               <option value="">Selecione uma uf</option>
               {ufs.map(uf => (
@@ -255,8 +323,8 @@ const Register = () => {
         </ul>
       </fieldset>
 
-      <button type="submit">
-        Cadastrar Lugar seguro
+      <button type="submit" disabled={loading}>
+        {loading ? 'Enviando...' : 'Cadastrar Lugar seguro'}
       </button>
     </form>
     </div>

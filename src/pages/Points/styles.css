@@ -98,6 +98,26 @@
   overflow-y: auto;
 }
 
+#points-page main #panel .content .selected-point > a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin-bottom: 5px;
+}
+
+#points-page main #panel .content .selected-point > a h3 {
+  font-size: 16px;
+}
+
+#points-page main #panel .content .selected-point > a h4 {
+  font-size: 13px;
+  margin-left: 5px;
+}
+
+#points-page main #panel .content .selected-point h2 {
+  margin-bottom: 10px;
+}
+
 #points-page main #panel .content .selected-point a.report {
   color: red;
   font-size: 12px;
@@ -129,6 +149,7 @@
   margin-left: 10px;
   font-size: 15px;
   color: #333;
+  flex: 1;
 }
 #content-popup {
   display: flex;
@@ -152,4 +173,18 @@
   justify-content: center;
   align-self: center;
   display: flex;
+}
+
+@media (max-width: 900px) {
+  #points-page main #panel {
+    width: 100%;
+    padding: 0;
+    bottom: 0;
+    height: 40%;
+    left: 0;
+  }
+
+  #points-page main #panel .content {
+    border-radius: 0;
+  }
 }

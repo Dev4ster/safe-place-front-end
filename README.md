@@ -1,46 +1,78 @@
-# Getting Started with Create React App
+<h1 align="center">
+   Safe Place
+</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  <a href="#tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+   <a href="#repositorios">Repositórios</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#grupo">Grupo</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#memo-licença">Licença</a>
+</p>
 
-## Available Scripts
+<h2 align="center" style="color:#4BD4DD">
+  Front-end
+</h2>
 
-In the project directory, you can run:
+<p align="center">
+ <img src="https://img.shields.io/static/v1?label=PRs&message=welcome&color=15C3D6&labelColor=000000" alt="PRs welcome!" />
 
-### `yarn start`
+  <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=15C3D6&labelColor=000000">
+</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<br>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<p align="center">
+  <img alt="Happy" src=".github/safeplace.png" width="100%">
+</p>
 
-### `yarn test`
+## 🏃‍♀️ Run Project
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- iniciar o projeto `yarn start`
+- compilar o projeto `yarn build`
 
-### `yarn build`
+ao rodar o comando _start_ abrirá uma página no navegador com o site, certifique-se de que o back-end esteja rodando também.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 Tecnologias
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [Node.js](https://nodejs.org/en/)
+- [React](https://reactjs.org)
+- [React Native](https://facebook.github.io/react-native/)
+- [Expo](https://expo.io/)
+- [TypeScript](https://www.typescriptlang.org/)
 
-### `yarn eject`
+## 💻 Projeto
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+A plataforma Safeplace tem como proposta apontar como estão as medidas de prevenção contra o coronavírus nos estabelecimentos, em um mapa que contenham as indidações de cabines de descontamição, aferição de temperatura, capacidade para grandes públicos e disponibilização de àlcool em gel.💜
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🔖 Layout
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Nos links abaixo você encontra o layout do projeto web e também do mobile. Lembrando que você precisa ter uma conta no [Figma](http://figma.com/) para acessá-lo.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- [Layout Web](https://www.figma.com/file/F4afuT1JkLOA9iE3Wn7T42/Landing-Page?node-id=0%3A1)
 
-## Learn More
+## 🧠 Repositorios
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+No links a seguir você encontra o front-end, back-end e mobile do projeto
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [Front-end](https://nodejs.org/en/)
+- [Mobile](https://reactjs.org)
+- [Back-end](https://facebook.github.io/react-native/)
+
+## 👨‍🎓 Grupo
+
+| Nome                   | Ra      | Função                                                                                                       | Linkedin | Github |
+| ---------------------- | ------- | ------------------------------------------------------------------------------------------------------------ | -------- | ------ |
+| Victor Menezes         | 1692977 | Desenvolvedor Full-Stack: responsável pelo desenvolvimento da plataforma front-end e back-end                |          |        |
+| Andrea Guazzelli       | 8909872 | Desenvolvedora Full-Stack: responsável pelo desenvolvimento da plataforma front-end e back-end               |          |        |
+| Henrique Braz de Godoy | 7491931 | Designer UX/UI: responsável pela concepção visual e pela expêriencia de uso da plataforma                    |          |        |
+| Ana Carolina Moda      | 1720294 | Gestora do Projeto: responsável pela gestão das tarefas, organização do cronograma e documentação do projeto |          |        |
+
+## :memo: Licença
+
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
+
+---

@@ -79,6 +79,16 @@
   margin-bottom: 24px;
 }
 
+#page-create-point form .field > div > div {
+  flex: 1;
+  background: #f0f0f5;
+  border-radius: 8px;
+  border: 0;
+  padding: 16px 24px;
+  font-size: 16px;
+  color: #6c6c80;
+}
+
 #page-create-point form .field input[type="text"],
 #page-create-point form .field input[type="email"],
 #page-create-point form .field input[type="number"] {
@@ -200,4 +210,24 @@
 .items-grid li.selected {
   background: var(--primary-color-light);
   border: 2px solid var(--primary-color);
+}
+
+@media (max-width: 900px) {
+  #page-create-point header {
+    flex-direction: column;
+  }
+
+  #page-create-point form {
+    padding: 20px;
+  }
+  #page-create-point form .field-group {
+    flex-direction: column;
+  }
+  #page-create-point form .field-group .field + .field {
+    margin-left: 0;
+  }
+
+  .items-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

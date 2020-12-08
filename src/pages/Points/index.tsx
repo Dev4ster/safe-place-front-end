@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import { TileLayer, Marker, MapContainer, Popup } from 'react-leaflet'
-import { FiCheckCircle, FiChevronRight } from 'react-icons/fi'
+import { FiCheckCircle, FiChevronRight, FiXCircle } from 'react-icons/fi'
+import { FaWhatsapp } from 'react-icons/fa'
+
 import AsyncSelect from 'react-select/async';
 
 import Chips, {Chip} from 'react-chips'
@@ -41,15 +43,28 @@ interface AssessmentsData {
   assessment: string
 }
 
+interface LoadPointsDTO  {
+  uf?: string,
+  city?: string[],
+  assessments?: number[]
+}
+
 
 const Points = () => {
   const [points, setPoints] = useState<PointsDATA[]>([])
   const [ufs, setUfs] = useState<string[]>([])
   const [selectedPoint, setSelectedPoint] = useState<PointsDATASelected>(null)
   const [citys, setCitys] = useState([])
+  const [assessments, setAssessments] = useState<AssessmentsData[]>([])
+
+
+  // filter
+  const [selectedUf, setSelectedUf] = useState<string>()
   const [selectedCitys, setSelectedCitys] = useState<string[]>([])
   const [filterAssessments, setFilterAssessments] = useState<string[]>([])
-  const [assessments, setAssessments] = useState<string[]>([])
+
+
+
 
   const loadPoint = async (id: number): Promise<PointsDATASelected>  => {
     const response = await api.get('/points/'+id)
@@ -95,22 +110,41 @@ const Points = () => {
     .then(res=> res.json())
     .then((res: {nome: string}[]) => res.map(city => city.nome))
     .then(setCitys)
+    setSelectedUf(data.label)
+  }
+
+  const loadPoints = async ( data? : LoadPointsDTO) => {
+    const response = await api.get('/points', {params:{
+      uf: data?.uf,
+      citys: data?.city.join(','),
+      assessments: data?.assessments.join(',')
+    }})
+    setPoints(response.data)
   }
 
   useEffect(()=>{
-    const loadPoints = async () => {
-      const response = await api.get('/points')
-      setPoints(response.data)
-    }
-
     const loadAssessments = async () => {
       const response = await api.get('/assessments')
       console.log(response.data)
-      setAssessments(response.data.map((ass: AssessmentsData) => ass.assessment))
+      setAssessments(response.data)
     }
     loadPoints()
     loadAssessments()
   }, [])
+
+  useEffect(()=>{
+    if(selectedUf || selectedCitys || filterAssessments){
+        loadPoints({
+        uf:selectedUf,
+        city:selectedCitys,
+        assessments: filterAssessments.map(ass => {
+          const findAss = assessments.find(asf => asf.assessment === ass)
+          return findAss.id
+        })
+      })
+    }
+    
+  }, [selectedUf, selectedCitys, filterAssessments, assessments])
 
 
   return (
@@ -151,7 +185,10 @@ const Points = () => {
             </Marker>
           ))}
           </MapContainer>
-          <div id="panel">
+          <div id="panel" style={{
+            height: selectedPoint && window.innerWidth <= 900 
+            ? '90%' :  window.innerWidth > 900 ? '100vh' : '40%'
+          }}>
             <div className="content">
               <h1>Insira abaixo o lugar que você deseja visitar.</h1>
 
@@ -187,7 +224,7 @@ const Points = () => {
                 value={filterAssessments}
                 onChange={setFilterAssessments}
                 placeholder="Avaliações"
-                suggestions={assessments}
+                suggestions={assessments.map(ass => ass.assessment)}
               />
 
                   {selectedPoint && (
@@ -197,12 +234,21 @@ const Points = () => {
                 {selectedPoint && (
                 <div className="selected-point">
                   <h2>{selectedPoint.title}</h2>
+                  <a href={`mailto:${selectedPoint.email}`}>
+                    <h3>{selectedPoint.email}</h3>
+                  </a>
+                  <a href={`mailto:${selectedPoint.whatsapp}`}>
+                    <FaWhatsapp color="#25D334" size={20} />
+                    <h4>{selectedPoint.whatsapp}</h4>
+                  </a>
                   <div className="assessments">
                   <h2>Avaliação do estabelecimento</h2>
                     <ul>
                       {selectedPoint?.assessments.map(assessment => (
                         <li key={assessment.assessment + Math.random()}>
-                          <FiCheckCircle size={30} color="#4BD4DD" />
+                          {assessment.has ? 
+                          <FiCheckCircle size={30} color="#4BD4DD" /> 
+                          : <FiXCircle size={30} color="#F36F6F" />}
                           <span>{assessment.assessment}</span>
                         </li>
                       ))}
