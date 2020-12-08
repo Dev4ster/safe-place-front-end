@@ -12,7 +12,7 @@
 </p>
 
 <h2 align="center" style="color:#4BD4DD">
-  Front-end
+  Back-End
 </h2>
 
 <p align="center">
@@ -29,10 +29,16 @@
 
 ## 🏃‍♀️ Run Project
 
-- iniciar o projeto `yarn start`
-- compilar o projeto `yarn build`
+- o projeto necessita do nodejs e yarn instalados na sua máquina
+- o projeto utiliza um banco de dados local postegres, é necessário rodar os passos abaixo para que funcione
 
-ao rodar o comando _start_ abrirá uma página no navegador com o site, certifique-se de que o back-end esteja rodando também.
+comandos de terminal:
+
+- iniciar o banco de dados `yarn knex:migrate:latest`
+- popular banco de dados com dados inicias `yarn knex:seed`
+- iniciar back-end `yarn dev`
+
+ao rodar o comando _dev_ uma mensagem no terminal irá ser exibido `server is ready`. certifique-se de que o exista um arquivo nesse caminho `src\database\database.sqlite`
 
 ## 🚀 Tecnologias
 
@@ -58,17 +64,17 @@ Nos links abaixo você encontra o layout do projeto web e também do mobile. Lem
 
 No links a seguir você encontra o front-end, back-end e mobile do projeto
 
-- [Front-end](https://nodejs.org/en/)
-- [Back-end](https://facebook.github.io/react-native/)
+- [Front-end](https://github.com/Dev4ster/safe-place-front-end/)
+- [Back-end](https://github.com/Dev4ster/safe-place-back-end/)
 
 ## 👨‍🎓 Grupo
 
-| Nome                   | Ra      | Função                                                                                                       | Linkedin | Github |
-| ---------------------- | ------- | ------------------------------------------------------------------------------------------------------------ | -------- | ------ |
-| Victor Menezes         | 1692977 | Desenvolvedor Full-Stack: responsável pelo desenvolvimento da plataforma front-end e back-end                |          |        |
-| Andrea Guazzelli       | 8909872 | Desenvolvedora Full-Stack: responsável pelo desenvolvimento da plataforma front-end e back-end               |          |        |
-| Henrique Braz de Godoy | 7491931 | Designer UX/UI: responsável pela concepção visual e pela expêriencia de uso da plataforma                    |          |        |
-| Ana Carolina Moda      | 1720294 | Gestora do Projeto: responsável pela gestão das tarefas, organização do cronograma e documentação do projeto |          |        |
+| Nome                   | Ra      | Função                                                                                                       | Contato                                                              |
+| ---------------------- | ------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| Victor Menezes         | 1692977 | Desenvolvedor Full-Stack: responsável pelo desenvolvimento da plataforma front-end e back-end                | [Linkedin](https://www.linkedin.com/in/victormenezes35/)             |
+| Andrea Guazzelli       | 8909872 | Desenvolvedora Full-Stack: responsável pelo desenvolvimento da plataforma front-end e back-end               | [Linkedin](https://www.linkedin.com/in/andrea-guazzelli/)            |
+| Henrique Braz de Godoy | 7491931 | Designer UX/UI: responsável pela concepção visual e pela expêriencia de uso da plataforma                    | [Linkedin](https://www.linkedin.com/in/henrique-b-godoy/)            |
+| Ana Carolina Moda      | 1720294 | Gestora do Projeto: responsável pela gestão das tarefas, organização do cronograma e documentação do projeto | [Linkedin](https://www.linkedin.com/in/ana-carolina-moda-b79280149/) |
 
 ## :memo: Licença
 

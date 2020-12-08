@@ -177,7 +177,7 @@ const Points = () => {
                   <strong>
                     {point.address} - {point.city}, {point.uf}
                   </strong>
-                  <a id="ir" href="#!sd" target="__blank">
+                  <a id="ir" href={`https://www.google.com/maps/place/${point.latitude},${point.longitude}`} target="__blank">
                     <FiChevronRight color="#fff" size={20} />
                   </a>
                 </div>
@@ -237,7 +237,7 @@ const Points = () => {
                   <a href={`mailto:${selectedPoint.email}`}>
                     <h3>{selectedPoint.email}</h3>
                   </a>
-                  <a href={`mailto:${selectedPoint.whatsapp}`}>
+                  <a href={`https://wa.me/${selectedPoint.whatsapp}`}>
                     <FaWhatsapp color="#25D334" size={20} />
                     <h4>{selectedPoint.whatsapp}</h4>
                   </a>

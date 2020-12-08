@@ -1,6 +1,6 @@
 import React, { useEffect, useState, ChangeEvent, useCallback, FormEvent } from 'react'
 import { FiArrowLeft } from 'react-icons/fi'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
 import { TileLayer, Marker, MapContainer, useMapEvents } from 'react-leaflet'
 import { toast } from 'react-toastify';
@@ -45,13 +45,14 @@ function MyComponent({locationCB} : MyComponentDTO) {
 
   locationCB(location)
   useEffect(()=>{
-   // map.locate()
+   map.locate()
   }, [])
 
   return <Marker position={location} />
 }
 
 const Register = () => {
+  const history = useHistory()
   const [assessments, setAssessments] = useState<Assessments[]>([])
   const [ufs, setUfs] = useState<UFDTO[]>([])
   const [municipios, setMunicipios] = useState<{label: string, value: number}[]>([])
@@ -102,7 +103,8 @@ const Register = () => {
     }
     try {
       const response = await axios.get(`https://nominatim.openstreetmap.org/reverse.php?lat=${data.latitude}&lon=${data.longitude}&zoom=18&format=jsonv2`)
-      data.address = response.data.name
+      data.address = response.data.address.road || response.data.name
+      console.log(response.data)
       
       const send = await api.post('/points', data)
   
@@ -117,11 +119,13 @@ const Register = () => {
         setMunicipio('')
         setAssessmentsPoint([])
         setLoading(false)
+        history.push('/pontos');
       }else {
         toast('Houve um problema ao cadastrar seu ponto, tente novamente.', {type: 'error'})
         setLoading(false)
       }
     }catch(e){
+      console.log(e)
       setLoading(false)
       toast('Houve um problema ao cadastrar seu ponto, tente novamente.', {type: 'error'})
     }
